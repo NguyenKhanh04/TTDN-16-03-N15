@@ -31,10 +31,16 @@
             sequence="2"
             action="action_chuc_vu"
         />
+        <menuitem name="Danh mục phòng ban" 
+            id="menu_phong_ban" 
+            parent="menu_danh_muc_chung" 
+            sequence="3"
+            action="action_phong_ban"
+        />
         <menuitem name="Danh mục chứng chỉ, bằng cấp" 
             id="menu_chung_chi_bang_cap" 
             parent="menu_danh_muc_chung" 
-            sequence="3"
+            sequence="4"
             action="action_chung_chi_bang_cap"
         />
         <menuitem name="Lịch sử công tác" 
@@ -48,6 +54,12 @@
             parent="menu_root" 
             sequence="4"
             action="action_danh_sach_chung_chi_bang_cap"
+        />
+        <menuitem name="Chấm công" 
+            id="menu_cham_cong" 
+            parent="menu_root" 
+            sequence="5"
+            action="action_cham_cong"
         />
     </data>
 </odoo>

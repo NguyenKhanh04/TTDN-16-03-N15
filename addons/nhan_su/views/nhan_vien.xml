@@ -18,6 +18,10 @@
                             <field name="so_nguoi_bang_tuoi"/>
                             <field name="que_quan"/>
                             <field name="email"/>
+                            <field name="so_dien_thoai"/>
+                            <field name="so_bhxh"/>
+                            <field name="dia_chi"/>
+                            <field name="luong"/>
                             <field name="anh" widget="image"/>
                         </group>
                         <notebook>
@@ -26,6 +30,17 @@
                             </page>
                             <page string="Danh sách chứng chỉ bằng cấp">
                                 <field name="danh_sach_chung_chi_bang_cap_ids"/>
+                            </page>
+                            <page string="Danh sách phòng ban">
+                                <field name="phong_ban_ids" nolabel="1">
+                                    <tree>
+                                        <field name="ma_dinh_danh"/>
+                                        <field name="ten_phong_ban"/>
+                                        <field name="truong_phong_id"/>
+                                        <field name="trang_thai"/>
+                                        <field name="so_luong_nhan_vien"/>
+                                    </tree>
+                                </field>
                             </page>
                         </notebook>
                     </sheet>
@@ -48,6 +63,9 @@
                     <field name="so_nguoi_bang_tuoi"/>
                     <field name="que_quan"/>
                     <field name="email"/>
+                    <field name="so_dien_thoai"/>
+                    <field name="so_bhxh"/>
+                    <field name="luong"/>
                 </tree>
             </field>
         </record>
@@ -62,6 +80,9 @@
                     <field name="tuoi"/>
                     <field name="que_quan"/>
                     <field name="email"/>
+                    <field name="so_bhxh"/>
+                    <field name="dia_chi"/>
+                    <field name="luong"/>
                 </search>
             </field>
         </record>

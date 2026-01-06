@@ -19,6 +19,9 @@ class NhanVien(models.Model):
     que_quan = fields.Char("Quê quán")
     email = fields.Char("Email")
     so_dien_thoai = fields.Char("Số điện thoại")
+    so_bhxh = fields.Char("Số BHXH")
+    dia_chi = fields.Text("Địa chỉ")
+    luong = fields.Float("Lương", digits=(16, 0))
     lich_su_cong_tac_ids = fields.One2many(
         "lich_su_cong_tac", 
         inverse_name="nhan_vien_id", 
@@ -29,8 +32,16 @@ class NhanVien(models.Model):
         "danh_sach_chung_chi_bang_cap", 
         inverse_name="nhan_vien_id", 
         string = "Danh sách chứng chỉ bằng cấp")
+    # Mối quan hệ nhiều-nhiều với phòng ban
+    phong_ban_ids = fields.Many2many(
+        'phong_ban',
+        'phong_ban_nhan_vien_rel',
+        'nhan_vien_id',
+        'phong_ban_id',
+        string="Danh sách phòng ban"
+    )
     so_nguoi_bang_tuoi = fields.Integer("Số người bằng tuổi", 
-                                        compute="so_nguoi_bang_tuoi",
+                                        compute="_compute_so_nguoi_bang_tuoi",
                                         store=True
                                         )
     
@@ -45,6 +56,8 @@ class NhanVien(models.Model):
                     ]
                 )
                 record.so_nguoi_bang_tuoi = len(records)
+            else:
+                record.so_nguoi_bang_tuoi = 0
     _sql_constrains = [
         ('ma_dinh_danh_unique', 'unique(ma_dinh_danh)', 'Mã định danh phải là duy nhất')
     ]
@@ -52,8 +65,8 @@ class NhanVien(models.Model):
     @api.depends("ho_ten_dem", "ten")
     def _compute_ho_va_ten(self):
         for record in self:
-            if record.ho_ten_dem and record.ten:
-                record.ho_va_ten = record.ho_ten_dem + ' ' + record.ten
+            parts = [part for part in [record.ho_ten_dem, record.ten] if part]
+            record.ho_va_ten = ' '.join(parts) if parts else ''
     
     
     
@@ -71,9 +84,11 @@ class NhanVien(models.Model):
             if record.ngay_sinh:
                 year_now = date.today().year
                 record.tuoi = year_now - record.ngay_sinh.year
+            else:
+                record.tuoi = 0
 
     @api.constrains('tuoi')
     def _check_tuoi(self):
         for record in self:
-            if record.tuoi < 18:
+            if record.tuoi and record.tuoi < 18:
                 raise ValidationError("Tuổi không được bé hơn 18")
