@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ai_assistant_form" model="ir.ui.view">
+        <field name="name">ai.assistant.form</field>
+        <field name="model">asset.ai.assistant</field>
+        <field name="arch" type="xml">
+            <form string="AI Chat Assistant">
+                <sheet>
+                    <div class="o_chat_container" style="height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 8px; background: #fff;">
+                        <field name="chat_history" widget="html" nolabel="1" options="{'safe': True}"/>
+                    </div>
+                    <footer>
+                        <group>
+                            <label for="query" string="Your Command:"/>
+                            <field name="query" nolabel="1" placeholder="Type here (e.g., 'Find room for 5 people')..." default_focus="1"/>
+                        </group>
+                        <button name="action_send" string="Send Message" type="object" class="oe_highlight" icon="fa-paper-plane"/>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ai_assistant" model="ir.actions.act_window">
+        <field name="name">AI Smart Assistant</field>
+        <field name="res_model">asset.ai.assistant</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

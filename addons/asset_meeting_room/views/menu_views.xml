@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_asset_meeting_room_root" name="Quản lý Tài sản &amp; Phòng họp" web_icon="static/description/icon.png" sequence="10"/>
+
+    <menuitem id="menu_meeting_room" name="Phòng họp" parent="menu_asset_meeting_room_root" action="action_meeting_room" sequence="10"/>
+    
+    <menuitem id="menu_room_booking" name="Đặt phòng" parent="menu_asset_meeting_room_root" action="action_room_booking" sequence="20"/>
+
+    <menuitem id="menu_asset_management_parent" name="Tài sản" parent="menu_asset_meeting_room_root" sequence="30"/>
+    <menuitem id="menu_asset_category" name="Loại tài sản" parent="menu_asset_management_parent" action="action_asset_category" sequence="10"/>
+    <menuitem id="menu_asset_management" name="Quản lý tài sản" parent="menu_asset_management_parent" action="action_asset_management" sequence="20"/>
+
+    <menuitem id="menu_ai_assistant" name="Trợ lý AI" parent="menu_asset_meeting_room_root" action="action_ai_assistant" sequence="40"/>
+</odoo>

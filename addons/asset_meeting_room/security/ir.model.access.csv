@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_meeting_room,meeting.room,model_meeting_room,base.group_user,1,1,1,1
+access_asset_category,asset.category,model_asset_category,base.group_user,1,1,1,1
+access_asset_management,asset.management,model_asset_management,base.group_user,1,1,1,1
+access_asset_maintenance,asset.maintenance,model_asset_maintenance,base.group_user,1,1,1,1
+access_room_booking,room.booking,model_room_booking,base.group_user,1,1,1,1
+access_ai_assistant,asset.ai.assistant,model_asset_ai_assistant,base.group_user,1,1,1,1
+access_asset_allocation,asset.allocation,model_asset_allocation,base.group_user,1,1,1,1
+access_room_maintenance,room.maintenance,model_room_maintenance,base.group_user,1,1,1,1

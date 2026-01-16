@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_meeting_room_tree" model="ir.ui.view">
+        <field name="name">meeting.room.tree</field>
+        <field name="model">meeting.room</field>
+        <field name="arch" type="xml">
+            <tree string="Phòng họp">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="location"/>
+                <field name="capacity"/>
+                <field name="status"/>
+                <field name="responsible_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_meeting_room_form" model="ir.ui.view">
+        <field name="name">meeting.room.form</field>
+        <field name="model">meeting.room</field>
+        <field name="arch" type="xml">
+            <form string="Phòng họp">
+                <header>
+                    <field name="status" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Tên phòng"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="capacity"/>
+                            <field name="responsible_id"/>
+                        </group>
+                        <group>
+                            <field name="location"/>
+                            <field name="address"/>
+                            <field name="asset_count"/>
+                            <field name="asset_summary"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Tài sản">
+                            <field name="asset_ids">
+                                <tree editable="bottom">
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="category_id"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Lịch sử bảo trì">
+                            <field name="maintenance_ids">
+                                <tree editable="bottom">
+                                    <field name="date"/>
+                                    <field name="description"/>
+                                    <field name="cost" sum="Tổng chi phí"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_meeting_room" model="ir.actions.act_window">
+        <field name="name">Phòng họp</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">meeting.room</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sequence for Borrow Slip -->
+    <record id="seq_asset_borrow_slip" model="ir.sequence">
+        <field name="name">Asset Borrow Slip</field>
+        <field name="code">asset.borrow.slip</field>
+        <field name="prefix">PM/%(year)s/</field>
+        <field name="padding">3</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_asset_borrow_slip_tree" model="ir.ui.view">
+        <field name="name">asset.borrow.slip.tree</field>
+        <field name="model">asset.borrow.slip</field>
+        <field name="arch" type="xml">
+            <tree string="Phiếu mượn tài sản" decoration-info="state == 'draft'" decoration-warning="state == 'borrowed'" decoration-muted="state == 'returned'">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="date_borrow"/>
+                <field name="date_return"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_asset_borrow_slip_form" model="ir.ui.view">
+        <field name="name">asset.borrow.slip.form</field>
+        <field name="model">asset.borrow.slip</field>
+        <field name="arch" type="xml">
+            <form string="Phiếu mượn tài sản">
+                <header>
+                    <button name="action_confirm_borrow" string="Xác nhận mượn" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_return_assets" string="Trả tài sản" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'borrowed')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,borrowed,returned"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="date_borrow" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="date_return"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Danh sách tài sản">
+                            <field name="asset_ids" widget="many2many" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="category_id"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Ghi chú">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_asset_borrow_slip" model="ir.actions.act_window">
+        <field name="name">Phiếu mượn tài sản</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.borrow.slip</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo phiếu mượn tài sản mới
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item (Assuming parent menu exists in menu_views.xml, typically 'menu_asset_management_root' or similar) -->
+    <!-- I will likely need to check menu_views.xml to find the correct parent -->
+</odoo>

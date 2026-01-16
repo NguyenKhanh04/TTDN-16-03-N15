@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_room_booking_tree" model="ir.ui.view">
+        <field name="name">room.booking.tree</field>
+        <field name="model">room.booking</field>
+        <field name="arch" type="xml">
+            <tree string="Đặt phòng họp">
+                <field name="room_id"/>
+                <field name="booker_id"/>
+                <field name="start_time"/>
+                <field name="end_time"/>
+                <field name="num_participants"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_room_booking_form" model="ir.ui.view">
+        <field name="name">room.booking.form</field>
+        <field name="model">room.booking</field>
+        <field name="arch" type="xml">
+            <form string="Đặt phòng họp">
+                <header>
+                    <button name="action_ai_suggest_room" string="AI gợi ý phòng" type="object" class="oe_highlight" icon="fa-magic"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="room_id" string="Phòng đã chọn"/>
+                        <h1>
+                            <field name="room_id" placeholder="Chọn phòng hoặc dùng AI gợi ý"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Thông tin cơ bản">
+                            <field name="booker_id"/>
+                            <field name="num_participants"/>
+                            <field name="purpose"/>
+                        </group>
+                        <group string="Thời gian">
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                        </group>
+                    </group>
+                    <group string="Phân tích từ AI">
+                        <field name="ai_recommendation" nolabel="1" class="text-info font-italic"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_room_booking" model="ir.actions.act_window">
+        <field name="name">Đặt phòng họp</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">room.booking</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

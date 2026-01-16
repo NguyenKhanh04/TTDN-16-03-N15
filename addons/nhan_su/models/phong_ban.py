@@ -101,7 +101,6 @@ class PhongBan(models.Model):
         ('ma_dinh_danh_unique', 'unique(ma_dinh_danh)', 'Mã định danh phải là duy nhất')
     ]
     
-    @api.model
     def name_get(self):
         """Hiển thị tên phòng ban kèm mã định danh"""
         result = []
